@@ -20,6 +20,7 @@ func Read() *model.Config {
 	config.DBConfig = readDBConfig()
 	config.JWTConfig = readJWTConfig()
 	config.RedisConfig = readRedisConfig()
+
 	return &config
 }
 
