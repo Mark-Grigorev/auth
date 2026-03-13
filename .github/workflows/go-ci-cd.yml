@@ -8,7 +8,7 @@ on:
     branches: ["main", "feature*"]
     
 env:
-  GO_VERSION: '1.23.2'
+  GO_VERSION: '1.24.6'
   ALPINE_VERSION: '3.20'
   PORT: '80'
   LINTER_VERS: 'v1.60.1'
@@ -18,6 +18,6 @@ jobs:
   ci:
     uses: Mark-Grigorev/central-ci-cd/.github/workflows/go-ci-complete.yml@main
     with:
-      go-version: '1.23.2'
+      go-version: '1.24.6'
       linter-version: 'v1.60.1'
       ubuntu-version: '22.04'
