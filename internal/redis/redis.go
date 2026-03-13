@@ -8,19 +8,19 @@ import (
 	"time"
 
 	"github.com/Mark-Grigorev/auth/internal/model"
-	"github.com/go-redis/redis/v8"
+	goredis "github.com/go-redis/redis/v8"
 )
 
 type Client struct {
 	ctx context.Context
-	rdb redis.UniversalClient
+	rdb goredis.UniversalClient
 	ttl time.Duration
 }
 
 func New(cfg model.RedisConfig) (*Client, error) {
 	ctx := context.Background()
 	addrs := strings.Split(cfg.Servers, ",")
-	rdb := redis.NewUniversalClient(&redis.UniversalOptions{
+	rdb := goredis.NewUniversalClient(&goredis.UniversalOptions{
 		Addrs:    addrs,
 		Password: cfg.Password,
 	})
