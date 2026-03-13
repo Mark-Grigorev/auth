@@ -11,6 +11,6 @@ jobs:
   ci:
     uses: Mark-Grigorev/central-ci-cd/.github/workflows/go-ci-complete.yml@main
     with:
-      go-version: ${{ vars.GO_VERS }}
-      linter-version: ${{ vars.LINTER_VERS }}
-      ubuntu-version: ${{ vars.UBUNTU_VERS }}
+      go-version: '1.24.6'
+      linter-version: 'v1.64.8'
+      ubuntu-version: '22.04'
