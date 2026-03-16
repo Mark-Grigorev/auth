@@ -4,19 +4,27 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Mark-Grigorev/auth/internal/db"
-	jwtmanager "github.com/Mark-Grigorev/auth/internal/jwt_manager"
 	"github.com/Mark-Grigorev/auth/internal/model"
 	"github.com/Mark-Grigorev/auth/internal/utils"
 )
 
-type Logic struct {
-	cfg        *model.Config
-	db         *db.DBClient
-	jwtManager *jwtmanager.Manager
+type DBProvider interface {
+	CreateUser(ctx context.Context, userData *model.UserRegistrationData) (int64, error)
+	Authorisation(ctx context.Context, login, password string) (int64, error)
 }
 
-func New(cfg *model.Config, db *db.DBClient, jwtManager *jwtmanager.Manager) *Logic {
+type JWTProvider interface {
+	CreateToken(userID int64) (string, error)
+	ValidateToken(token string) (bool, error)
+}
+
+type Logic struct {
+	cfg        *model.Config
+	db         DBProvider
+	jwtManager JWTProvider
+}
+
+func New(cfg *model.Config, db DBProvider, jwtManager JWTProvider) *Logic {
 	return &Logic{
 		cfg:        cfg,
 		db:         db,
