@@ -1,5 +1,5 @@
 # defaults
-ARG GO_VERSION=1.20.1
+ARG GO_VERSION=1.24.6
 ARG ALPINE_VERSION=3.19
 ARG VERSION=DEV
 ARG PORT=8080
@@ -13,7 +13,7 @@ WORKDIR /app
 RUN  apk add --no-cache gcc libc-dev
 COPY go.mod go.sum ./
 
-RUN go mod download && go mod vendor
+RUN go mod download
 
 COPY . .
 
